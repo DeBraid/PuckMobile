@@ -1,22 +1,26 @@
 import React, { Component } from 'react';
-import fetch from 'node-fetch'
+import fetch from 'isomorphic-fetch';
 import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
   componentDidMount() {
-    fetch('http://localhost:4730/skaters/')
-    .then(function (res) {
-      console.log(res.status)
-      console.log(res.statusText)
-      return res.json();
-    })
-    .then((res)=>{
-      console.log('res', res);
-    })
-    .catch(function (err) {
-        console.log('// API call failed...', err);
-    });
+    // const uri = 'https://puck-api-ixsjxyvvpl.now.sh/skaters';
+    const uri = 'http://localhost:4730/skaters/';
+    fetch(uri)
+      .then((res) => {
+        console.log('res', res);
+        if (res.status >= 400) {
+          throw new Error("Bad server");
+        }
+        return res.json();
+      })
+      .then((json) => {
+        console.log('res json', json);
+      })
+      .catch(function (err) {
+          console.log('fetch failed...', err);
+      });
   }
   render() {
     return (
