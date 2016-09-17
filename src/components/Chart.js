@@ -13,8 +13,8 @@ class Chart extends Component {
       statType, 
       metric,
       skaters,
-      uri : `http://localhost:4730/skaters/${ statType }`,
-      // uri : `https://puck-api-aizjumxpky.now.sh/skaters/${ statType }`,
+      // uri : `http://localhost:4730/skaters/${ statType }`,
+      uri : `https://puck-api-aizjumxpky.now.sh/skaters/${ statType }`,
     }
   }
   componentDidMount() {
