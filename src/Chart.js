@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import fetchTopTenByMetric from './fetchTopTenByMetric.js';
 import topTenByMetric from './topTenByMetric.js';
 import ListOfSkaters from './ListOfSkaters.js';
+import MetricNavButtons from './MetricNavButtons.js';
 import _ from 'lodash';
 
 class Chart extends Component {
@@ -39,31 +40,18 @@ class Chart extends Component {
   render() {
     let { skaters, metric, statType } = this.state;
     let { top, bottom } = skaters;
-    let metrics = [];
-    if (top && top[0]) {
-      metrics = _.without(Object.keys(top[0]), "name");
-    }
     
     if (!metric || !statType) {
       return (<h2> Pick a metric like 
         <Link to={`skaters/goals/GF`}> Goals For </Link> or,
         <Link to={`skaters/corsi/CF`}> Corsi For </Link>.
-
       </h2>);
     } else {
       return (
         <div>
           <div className="App-header">
             <h2>Charts for {metric} </h2>
-            {metrics.map((met,key)=>{
-              return (<button className="btn" type="button" key={key}>
-                <Link 
-                  to={`skaters/corsi/${ met }`}
-                  style={{textDecoration: "none", color: "white"}}>
-                  {met}
-                </Link>
-              </button>);
-            })}
+            <MetricNavButtons metricsObj={top[0]} />
           </div>
           <div className="container">
             <div className="left">
