@@ -1,22 +1,23 @@
 import React, { Component } from 'react';
 import fetch from 'isomorphic-fetch';
 import logo from './logo.svg';
+import throwOrJSON from './throwOrJSON.js';
 import './App.css';
 
 class App extends Component {
+  constructor(){
+    super();
+    this.state = {
+      uri : 'https://puck-api-jfmzaowrqs.now.sh/skaters/goals',
+      errorHandler: throwOrJSON
+    }
+  }
   componentDidMount() {
-    // const uri = 'https://puck-api-ixsjxyvvpl.now.sh/skaters';
-    const uri = 'http://localhost:4730/skaters/';
+    let { uri, errorHandler } = this.state;
     fetch(uri)
-      .then((res) => {
-        console.log('res', res);
-        if (res.status >= 400) {
-          throw new Error("Bad server");
-        }
-        return res.json();
-      })
-      .then((json) => {
-        console.log('res json', json);
+      .then(errorHandler)
+      .then((data)=>{
+        console.log('goals', data);
       })
       .catch(function (err) {
           console.log('fetch failed...', err);
