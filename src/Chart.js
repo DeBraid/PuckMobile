@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import fetch from 'isomorphic-fetch';
 import throwOrJSON from './throwOrJSON.js';
+import topTen from './topTen.js';
 
 class Chart extends Component {
   constructor(){
@@ -13,11 +14,18 @@ class Chart extends Component {
   }
   componentDidMount() {
     let { uri, errorHandler } = this.state;
+    let metric = 'GFPct';
     const data = fetch(uri)
       .then(errorHandler)
+      .then((foo)=>{
+        console.log('foo.data[0]', foo.data[0]);
+        return topTen(foo.data, metric, 1)
+      })
       .then((data)=>{
-        console.log('data', data);
-        return data;
+        data.map((item)=>{
+          console.log('name', item.name);
+          console.log(metric, item[metric]);
+        })
       })
       .catch(function (err) {
           console.log('fetch failed...', err);
