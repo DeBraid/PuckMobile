@@ -2,7 +2,6 @@
 
 A fun side projects to deliver data for NHL analytics app very quickly.
 
-The back end if [on Github](http://github.com/DeBraid) as well.
 By [@Royal_Arse](http://twitter.com/Royal_Arse)
 
 
