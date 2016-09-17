@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import fetchTopTenByMetric from './fetchTopTenByMetric.js';
 import topTenByMetric from './topTenByMetric.js';
 import ListOfSkaters from './ListOfSkaters.js';
+import _ from 'lodash';
 
 class Chart extends Component {
   constructor(props){
@@ -40,13 +41,14 @@ class Chart extends Component {
     let { top, bottom } = skaters;
     let metrics = [];
     if (top && top[0]) {
-      metrics = Object.keys(top[0]);
+      metrics = _.without(Object.keys(top[0]), "name");
     }
     
-    if (!metric) {
+    if (!metric || !statType) {
       return (<h2> Pick a metric like 
-        <Link to="skaters/corsi/CF">Corsi For (CF) </Link> or,
-        <Link to="skaters/corsi/CF60">Corsi For p60 (CF60)</Link>.
+        <Link to={`skaters/goals/GF`}> Goals For </Link> or,
+        <Link to={`skaters/corsi/CF`}> Corsi For </Link>.
+
       </h2>);
     } else {
       return (
