@@ -5,8 +5,9 @@ import './App.css';
 class App extends Component {
   constructor(props){
     super(props);
-    console.log('props', props);
+    console.log('props', props.params);
     this.state = {
+      // season: props.season 
     }
   }
   render() {
