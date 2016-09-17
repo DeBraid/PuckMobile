@@ -1,41 +1,27 @@
 import React, { Component } from 'react';
-import fetch from 'isomorphic-fetch';
-import throwOrJSON from './throwOrJSON.js';
-import topTen from './topTen.js';
+import fetchTopTenByMetric from './fetchTopTenByMetric.js';
 
 class Chart extends Component {
   constructor(){
     super();
     this.state = {
       data: {},
-      uri : 'https://puck-api-jfmzaowrqs.now.sh/skaters/goals',
-      errorHandler: throwOrJSON
+      // uri : 'localhost:/skaters/corsi',
+      uri : 'https://puck-api-aizjumxpky.now.sh/skaters/goals',
+      metric : 'GFPct'
     }
   }
   componentDidMount() {
-    let { uri, errorHandler } = this.state;
-    let metric = 'GFPct';
-    const data = fetch(uri)
-      .then(errorHandler)
-      .then((foo)=>{
-        console.log('foo.data[0]', foo.data[0]);
-        return topTen(foo.data, metric, 1)
-      })
-      .then((data)=>{
-        data.map((item)=>{
-          console.log('name', item.name);
-          console.log(metric, item[metric]);
+    let { uri, metric } = this.state;
+    fetchTopTenByMetric(uri, metric)
+      .then((resp)=>{
+        this.setState({
+          data: resp
         })
-      })
-      .catch(function (err) {
-          console.log('fetch failed...', err);
       });
-
-    this.setState({
-      data: data
-    })
   }
   render() {
+    console.log('render data', this.state.data);
     return (
       <div className="App-header">
         <h2>Charts</h2>
