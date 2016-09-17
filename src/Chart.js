@@ -5,10 +5,14 @@ class Chart extends Component {
   constructor(){
     super();
     this.state = {
-      data: {},
+      skaters: [],
       // uri : 'localhost:/skaters/corsi',
       uri : 'https://puck-api-aizjumxpky.now.sh/skaters/goals',
-      metric : 'GFPct'
+      metric : 'GFPct',
+      styles: {
+        textAlign: 'left',
+        marginLeft: '10px'
+      }
     }
   }
   componentDidMount() {
@@ -16,16 +20,25 @@ class Chart extends Component {
     fetchTopTenByMetric(uri, metric)
       .then((resp)=>{
         this.setState({
-          data: resp
+          skaters: resp
         })
       });
   }
   render() {
-    console.log('render data', this.state.data);
+    let { skaters, metric, styles } = this.state;
+    console.log('skaters in render',skaters);
     return (
-      <div className="App-header">
-        <h2>Charts</h2>
-
+      <div>
+        <div className="App-header">
+          <h2>Charts for {metric} </h2>
+        </div>
+        <div style={styles}>
+          {skaters.map((skater,key,)=>{
+            return (<p key={key}>
+              {key+1}. {skater.name}: {skater[metric]} 
+            </p>)
+          })}
+        </div>
       </div>
     );
   }
