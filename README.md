@@ -1,3 +1,12 @@
+## PuckMobile
+
+A fun side projects to deliver data for NHL analytics app very quickly.
+
+By [@Royal_Arse]
+
+
+### CRA Boilerplate
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.  
