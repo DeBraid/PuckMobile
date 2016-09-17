@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import Chart from './Chart';
+import { Link } from 'react-router';
 import './App.css';
 
 class App extends Component {
   constructor(props){
     super(props);
-    // console.log('props', props.params);
+    console.log('APP props', props.params);
     this.state = {
       // season: props.season 
     }
@@ -13,7 +13,8 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Chart />
+        <h1>Hello World from APP</h1>
+        <Link to="skaters">Skaters</Link>
       </div>
     );
   }

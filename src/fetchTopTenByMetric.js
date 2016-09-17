@@ -15,7 +15,11 @@ const fetchTopTenByMetric = (uri, metric)=>{
   return fetch(uri)
     .then(errorHandler)
     .then((resp)=>{
-      return topTen(resp.data, metric)
+      return {
+        top: topTen(resp.data, metric),
+        bottom: topTen(resp.data, metric, 1),
+        all: resp.data
+      }
     })
     .catch(function (err) {
         console.log('fetch failed...', err);

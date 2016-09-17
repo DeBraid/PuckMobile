@@ -1,14 +1,20 @@
 import React, { Component } from 'react';
 import fetchTopTenByMetric from './fetchTopTenByMetric.js';
+import topTenByMetric from './topTenByMetric.js';
 
 class Chart extends Component {
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
+    let { statType, metric } = props.params; 
     this.state = {
-      skaters: [],
-      // uri : 'localhost:/skaters/corsi',
-      uri : 'https://puck-api-aizjumxpky.now.sh/skaters/goals',
-      metric : 'GFPct',
+      skaters: {
+        top: [],
+        bottom: [],
+        all: [],
+      },
+      uri : `http://localhost:4730/skaters/${ statType }`,
+      // uri : `https://puck-api-aizjumxpky.now.sh/skaters/${ props.statType }`,
+      metric : metric,
       styles: {
         textAlign: 'left',
         marginLeft: '10px'
@@ -24,23 +30,41 @@ class Chart extends Component {
         })
       });
   }
+  componentWillReceiveProps(nextProps, nextState) {
+    console.log('nextProps', nextProps);
+    const sk = this.state.skaters.all;
+    const {metric} = nextProps.params
+    this.setState({
+      skaters: topTenByMetric(sk, metric),
+      metric
+    })
+  }
   render() {
     let { skaters, metric, styles } = this.state;
-    console.log('skaters in render',skaters);
+    let { top, bottom } = skaters;
     return (
-      <div>
-        <div className="App-header">
-          <h2>Charts for {metric} </h2>
+        <div>
+          <div className="App-header">
+            <h2>Charts for {metric} </h2>
+          </div>
+          <div style={styles}>
+            <h3>Top</h3>
+            {top.map((skater,key,)=>{
+              return (<p key={key}>
+                {key+1}. {skater.name}: {skater[metric]} 
+              </p>)
+            })}
+          </div>
+          <div style={styles}>
+            <h3>Bottom</h3>
+            {bottom.map((skater,key,)=>{
+              return (<p key={key}>
+                {key+1}. {skater.name}: {skater[metric]} 
+              </p>)
+            })}
+          </div>
         </div>
-        <div style={styles}>
-          {skaters.map((skater,key,)=>{
-            return (<p key={key}>
-              {key+1}. {skater.name}: {skater[metric]} 
-            </p>)
-          })}
-        </div>
-      </div>
-    );
+      );
   }
 }
 
