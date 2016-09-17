@@ -1,6 +1,6 @@
 import React from 'react';
 import App from './App';
-import Skaters from './Skaters';
+import Skaters from './components/Skaters';
 import { Router, Route, hashHistory } from 'react-router'
 
 const routes = (

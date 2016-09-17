@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import fetchTopTenByMetric from './fetchTopTenByMetric.js';
-import topTenByMetric from './topTenByMetric.js';
+import fetchTopTenByMetric from './../helpers/fetchTopTenByMetric.js';
+import topTenByMetric from './../helpers/topTenByMetric.js';
 import ListOfSkaters from './ListOfSkaters.js';
 import MetricNavButtons from './MetricNavButtons.js';
 
