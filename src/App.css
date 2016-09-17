@@ -22,3 +22,28 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.left {
+    float: left;
+    width: 50%;
+}
+.right {
+    float: right;
+    width: 50%;
+}
+.container:after {
+    content:"";
+    display: table;
+    clear: both;
+}
+img {
+    max-width: 100%;
+    height: auto;
+}
+@media screen and (max-width: 480px) {
+    .left, 
+    .right {
+        float: none;
+        width: auto;
+    }
+}

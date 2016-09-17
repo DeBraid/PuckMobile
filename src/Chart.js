@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import fetchTopTenByMetric from './fetchTopTenByMetric.js';
 import topTenByMetric from './topTenByMetric.js';
+import ListOfSkaters from './ListOfSkaters.js';
 
 class Chart extends Component {
   constructor(props){
@@ -13,12 +14,8 @@ class Chart extends Component {
         all: [],
       },
       uri : `http://localhost:4730/skaters/${ statType }`,
-      // uri : `https://puck-api-aizjumxpky.now.sh/skaters/${ props.statType }`,
-      metric : metric,
-      styles: {
-        textAlign: 'left',
-        marginLeft: '10px'
-      }
+      // uri : `https://puck-api-aizjumxpky.now.sh/skaters/${ statType }`,
+      metric : metric
     }
   }
   componentDidMount() {
@@ -40,31 +37,24 @@ class Chart extends Component {
     })
   }
   render() {
-    let { skaters, metric, styles } = this.state;
+    let { skaters, metric } = this.state;
     let { top, bottom } = skaters;
     return (
-        <div>
-          <div className="App-header">
-            <h2>Charts for {metric} </h2>
+      <div>
+        <div className="App-header">
+          <h2>Charts for {metric} </h2>
+        </div>
+
+        <div className="container">
+          <div className="left">
+            <ListOfSkaters list={ top } title={"Top"} metric={metric}/>
           </div>
-          <div style={styles}>
-            <h3>Top</h3>
-            {top.map((skater,key,)=>{
-              return (<p key={key}>
-                {key+1}. {skater.name}: {skater[metric]} 
-              </p>)
-            })}
-          </div>
-          <div style={styles}>
-            <h3>Bottom</h3>
-            {bottom.map((skater,key,)=>{
-              return (<p key={key}>
-                {key+1}. {skater.name}: {skater[metric]} 
-              </p>)
-            })}
+          <div className="right">
+            <ListOfSkaters list={ bottom } title={"Bottom"} metric={metric}/>
           </div>
         </div>
-      );
+      </div>
+    );
   }
 }
 
