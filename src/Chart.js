@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router';
 import fetchTopTenByMetric from './fetchTopTenByMetric.js';
 import topTenByMetric from './topTenByMetric.js';
 import ListOfSkaters from './ListOfSkaters.js';
 import MetricNavButtons from './MetricNavButtons.js';
-import _ from 'lodash';
 
 class Chart extends Component {
   constructor(props){
@@ -38,32 +36,24 @@ class Chart extends Component {
     })
   }
   render() {
-    let { skaters, metric, statType } = this.state;
+    let { skaters, metric } = this.state;
     let { top, bottom } = skaters;
-    
-    if (!metric || !statType) {
-      return (<h2> Pick a metric like 
-        <Link to={`skaters/goals/GF`}> Goals For </Link> or,
-        <Link to={`skaters/corsi/CF`}> Corsi For </Link>.
-      </h2>);
-    } else {
-      return (
-        <div>
-          <div className="App-header">
-            <h2>Charts for {metric} </h2>
-            <MetricNavButtons metricsObj={top[0]} />
+    return (
+      <div>
+        <div className="App-header">
+          <h2>Charts for {metric} </h2>
+          <MetricNavButtons metricsObj={top[0]} />
+        </div>
+        <div className="container">
+          <div className="left">
+            <ListOfSkaters list={ top } title={"Top"} metric={metric}/>
           </div>
-          <div className="container">
-            <div className="left">
-              <ListOfSkaters list={ top } title={"Top"} metric={metric}/>
-            </div>
-            <div className="right">
-              <ListOfSkaters list={ bottom } title={"Bottom"} metric={metric}/>
-            </div>
+          <div className="right">
+            <ListOfSkaters list={ bottom } title={"Bottom"} metric={metric}/>
           </div>
         </div>
-      );
-    }
+      </div>
+    );
   }
 }
 

@@ -13,7 +13,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <h1>Hello World from APP</h1>
+        <h1>Welcome to PuckMobile</h1>
         <Link to="skaters">Skaters</Link>
       </div>
     );
