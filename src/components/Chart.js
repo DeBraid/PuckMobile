@@ -41,13 +41,10 @@ class Chart extends Component {
     let { top, bottom } = skaters;
     return (
       <div>
-        <div className="App-header">
-          <h2>Charts for {metric} </h2>
           <MetricNavButtons 
             metricsObj={top[0]} 
             statType={ statType }
           />
-        </div>
         <div className="container">
           <div className="left">
             <ListOfSkaters list={ top } title={"Top"} metric={metric}/>

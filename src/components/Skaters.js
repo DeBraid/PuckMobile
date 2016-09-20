@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import Chart from './Chart.js';
+import Breadcrumbs from './Breadcrumbs.js';
 import StatTypePrompt from './StatTypePrompt.js';
 
 class Skaters extends Component {
@@ -28,7 +29,7 @@ class Skaters extends Component {
     }
     return (
         <div className="Skaters">
-            <h2><Link to="skaters">Skaters</Link></h2>
+            <Breadcrumbs params={params} />
             { content() }
         </div>
     );
