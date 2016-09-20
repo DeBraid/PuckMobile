@@ -18,16 +18,16 @@ class MetricNavButtons extends Component {
   render() {
     let { metricsObj, statType } = this.state;
     let metrics = _.without(Object.keys(metricsObj), "name");
+    const btnStyle = {textDecoration: "none", color: "white"};
     return (
       <div>
-        {metrics.map((met,key)=>{
-          return (<button className="btn" type="button" key={key}>
-            <Link 
-              to={`skaters/${ statType }/${ met }`}
-              style={{textDecoration: "none", color: "white"}}>
-                {met}
-            </Link>
-          </button>);
+        { metrics.map((met,key)=>{
+          let href = `skaters/${ statType }/${ met }`;
+          return (
+            <button className="btn" type="button" key={key}>
+              <Link to={href} style={btnStyle}>{met}</Link>
+            </button>
+          );
         })}
       </div>
     );
