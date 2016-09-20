@@ -7,23 +7,23 @@ class MetricNavButtons extends Component {
     super(props);
     this.state = {
       metrics: [],
-      metricsObj: {}
+      metricsObj: {},
+      statType: props.statType
     }
   }
   componentWillReceiveProps (nextProps) {
     let { metricsObj } = nextProps;
-    this.setState({
-      metricsObj
-    })
+    this.setState({ metricsObj });
   }
   render() {
-    let metrics = _.without(Object.keys(this.state.metricsObj), "name");
+    let { metricsObj, statType } = this.state;
+    let metrics = _.without(Object.keys(metricsObj), "name");
     return (
       <div>
         {metrics.map((met,key)=>{
           return (<button className="btn" type="button" key={key}>
             <Link 
-              to={`skaters/corsi/${ met }`}
+              to={`skaters/${ statType }/${ met }`}
               style={{textDecoration: "none", color: "white"}}>
                 {met}
             </Link>

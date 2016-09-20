@@ -13,10 +13,9 @@ class Chart extends Component {
       statType, 
       metric,
       skaters,
-      // uri : `http://localhost:4730/skaters/${ statType }`,
-      uri : `https://puck-api-xhjpgcoxcg.now.sh/skaters/${ statType }`,
-      // https://puck-api-rujyfxrvym.now.sh NEW below
-      uri : `https://puck-api-rujyfxrvym.now.sh/skaters/${ statType }`,
+      uri : `http://localhost:4730/skaters/${ statType }`,
+      // Production URL:
+      // uri : `https://puck-api-rujyfxrvym.now.sh/skaters/${ statType }`,
     }
   }
   componentDidMount() {
@@ -38,13 +37,16 @@ class Chart extends Component {
     })
   }
   render() {
-    let { skaters, metric } = this.state;
+    let { skaters, metric, statType } = this.state;
     let { top, bottom } = skaters;
     return (
       <div>
         <div className="App-header">
           <h2>Charts for {metric} </h2>
-          <MetricNavButtons metricsObj={top[0]} />
+          <MetricNavButtons 
+            metricsObj={top[0]} 
+            statType={ statType }
+          />
         </div>
         <div className="container">
           <div className="left">
