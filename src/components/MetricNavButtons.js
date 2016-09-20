@@ -20,7 +20,7 @@ class MetricNavButtons extends Component {
     let metrics = _.without(Object.keys(metricsObj), "name");
     const btnStyle = {textDecoration: "none", color: "white"};
     return (
-      <div>
+      <div className="horz-scroll">
         { metrics.map((met,key)=>{
           let href = `skaters/${ statType }/${ met }`;
           return (
