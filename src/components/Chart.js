@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import fetchTopTenByMetric from './../helpers/fetchTopTenByMetric.js';
 import topTenByMetric from './../helpers/topTenByMetric.js';
+import K from './../AppConstants.js';
 import ListOfSkaters from './ListOfSkaters.js';
 import MetricNavButtons from './MetricNavButtons.js';
 
@@ -9,13 +10,12 @@ class Chart extends Component {
     super(props);
     let skaters = { top: [], bottom: [], all: [] };
     let { statType, metric } = props.params;
+    let uri = K.uri + statType;
     this.state = {
       statType, 
       metric,
       skaters,
-      uri : `http://localhost:4730/skaters/${ statType }`,
-      // Production URL:
-      // uri : `https://puck-api-rujyfxrvym.now.sh/skaters/${ statType }`,
+      uri
     }
   }
   componentDidMount() {
