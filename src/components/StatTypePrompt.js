@@ -1,6 +1,6 @@
 // StatTypePrompt
 import React, { Component } from 'react';
-import { Link } from 'react-router';
+import Link from 'react-router/lib/Link';
 
 class StatTypePrompt extends Component {
   render() {

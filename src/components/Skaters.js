@@ -1,6 +1,5 @@
 // Skaters
 import React, { Component } from 'react';
-import { Link } from 'react-router';
 import Chart from './Chart.js';
 import Breadcrumbs from './Breadcrumbs.js';
 import StatTypePrompt from './StatTypePrompt.js';
